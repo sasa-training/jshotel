@@ -2,7 +2,7 @@ module.exports = {
   mode: "production",
   entry: "./src/js/index.js",
   output: {
-    filename: "js/main.js"
+    filename: "main.js"
   },
   module: {
     rules: [{

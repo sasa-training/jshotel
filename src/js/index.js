@@ -1,14 +1,12 @@
 import ScrollToTop from "./module/scrollToTop.js";
 import spMenu from "./module/spMenu.js";
 
-
 // トップに戻る
 const scrollToTopDo = new ScrollToTop("#page-top", 400);
 scrollToTopDo.init();
 // トグル・スマホメニュー・ドロップダウンメニュー
 const spMenuDo = new spMenu(".toggle-btn");
 spMenuDo.init();
-
 
 let mySwiper = new Swiper(".swiper", {
     centeredSlides: true,
