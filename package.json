@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "cache": "npx gulp cache",
-    "dev": "NODE_ENV=development npx gulp build && NODE_ENV=development npx gulp",
-    "build": "NODE_ENV=production npx gulp build --production",
+    "dev": "npx gulp build && npx gulp",
+    "build": "npx gulp build --production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,16 +20,13 @@
   },
   "homepage": "https://github.com/yukinouz/gulp-essentials#readme",
   "devDependencies": {
-    "@babel/core": "^7.16.5",
-    "@babel/preset-env": "^7.16.5",
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
     "autoprefixer": "^10.2.6",
     "babel-loader": "^8.2.2",
-    "babel-plugin-transform-class-properties": "^6.24.1",
     "browser-sync": "^2.27.4",
     "css-declaration-sorter": "^6.0.3",
-    "gsap": "^3.8.0",
     "gulp": "^4.0.2",
-    "gulp-babel": "^8.0.0",
     "gulp-group-css-media-queries": "^1.2.2",
     "gulp-mode": "^1.1.0",
     "gulp-notify": "^4.0.0",
@@ -47,7 +44,5 @@
     "webpack-cli": "^4.7.2",
     "webpack-stream": "^6.1.2"
   },
-  "dependencies": {
-    "gsap": "^3.8.0"
-  }
+  "dependencies": {}
 }

@@ -1,11 +1,4 @@
-const {
-  src,
-  dest,
-  watch,
-  series,
-  parallel,
-  lastRun
-} = require("gulp");
+const { src, dest, watch, series, parallel, lastRun }  = require("gulp");
 const sass = require("gulp-sass")(require("sass"));
 const plumber = require("gulp-plumber");
 const notify = require("gulp-notify");
@@ -32,7 +25,7 @@ const bundleJs = (done) => {
     .on('error', function (e) {
       console.error(e);
       this.emit('end');
-    })
+  })
     .pipe(dest("dist/js"))
   done();
 };
@@ -43,26 +36,16 @@ const compileSass = done => {
       grid: "autoplace",
       cascade: false,
     }),
-    cssdeclsort({
-      order: "alphabetical"
-    })
+    cssdeclsort({ order: "alphabetical" })
   ];
-  src("./src/scss/**/*.scss", {
-      sourcemaps: true
-    })
+  src("./src/scss/**/*.scss", { sourcemaps: true })
     .pipe(
-      plumber({
-        errorHandler: notify.onError("Error: <%= error.message %>")
-      })
+      plumber({ errorHandler: notify.onError("Error: <%= error.message %>") })
     )
-    .pipe(sass({
-      outputStyle: "expanded"
-    }))
+    .pipe(sass({ outputStyle: "expanded" }))
     .pipe(postcss(postcssPlugins))
     .pipe(mode.production(gcmq()))
-    .pipe(dest("./dist/css", {
-      sourcemaps: "./sourcemaps"
-    }));
+    .pipe(dest("./dist/css", { sourcemaps: "./sourcemaps" }));
   done();
 };
 
@@ -71,9 +54,7 @@ const buildServer = done => {
     port: 8080,
     files: ["**/*"],
     // 静的サイト
-    server: {
-      baseDir: "./dist"
-    },
+    server: { baseDir: "./dist" },
     // 動的サイト
     // proxy: "http://localsite.local/",
     open: true,
@@ -91,9 +72,7 @@ const browserReload = done => {
 
 const compilePug = done => {
   src(["./src/pug/**/*.pug", "!" + "./src/pug/**/_*.pug"])
-    .pipe(plumber(({
-      errorHandler: notify.onError("Error: <%= error.message %>")
-    })))
+    .pipe(plumber(({ errorHandler: notify.onError("Error: <%= error.message %>") })))
     .pipe(pug({
       pretty: true
     }))
@@ -123,9 +102,7 @@ const copyImages = done => {
 };
 
 const generateWebp = done => {
-  src("./dist/img/**/*.{png,jpg,jpeg}", {
-      since: lastRun(generateWebp)
-    })
+  src("./dist/img/**/*.{png,jpg,jpeg}", {since: lastRun(generateWebp)})
     .pipe(webp())
     .pipe(dest("dist/img"));
   done();
@@ -140,22 +117,12 @@ const cacheBusting = done => {
 };
 
 const watchFiles = () => {
-  watch("./src/scss/**/*.scss", series(compileSass, browserReload))
-  watch("./src/pug/**/*.pug", series(compilePug, browserReload))
-  watch("./src/js/**/*.js", series(bundleJs, browserReload))
-  watch("./src/img/**/*", series(copyImages, generateWebp, browserReload))
+  watch( "./src/scss/**/*.scss", series(compileSass, browserReload))
+  watch( "./src/pug/**/*.pug", series(compilePug, browserReload))
+  watch( "./src/js/**/*.js", series(bundleJs, browserReload))
+  watch( "./src/img/**/*", series(copyImages, generateWebp, browserReload))
   // watch("./**/*.html", browserReload)
 };
-
-const babel = require('gulp-babel');
-
-// パス情報
-const paths = {
-  'root': './',
-  'jsSrc': './src/*.js',
-  'jsDist': './js/'
-}
-
 
 module.exports = {
   sass: compileSass,

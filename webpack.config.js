@@ -1,8 +1,8 @@
 module.exports = {
-  mode: 'production',
+  mode: "production",
   entry: "./src/js/index.js",
   output: {
-    filename: "main.js"
+    filename: "js/main.js"
   },
   module: {
     rules: [{
@@ -13,7 +13,6 @@ module.exports = {
           presets: [
             "@babel/preset-env",
           ],
-          plugins: ["@babel/plugin-proposal-class-properties"],
         },
       }, ],
     }, ],
